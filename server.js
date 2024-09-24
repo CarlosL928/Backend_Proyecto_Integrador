@@ -23,7 +23,8 @@ const pacienteSchema = new mongoose.Schema({
     apellido: { type: String, required: true },
     edad: { type: Number, required: true },
     telefono: { type: String, required: true },
-    historiaClinica: { type: String, required: true },
+    diagnostico: { type: String, required: false },
+    historiaClinica: { type: String, required: false },
 });
 
 // Definición del esquema de Admin
@@ -69,7 +70,7 @@ app.post('/pacientes', authMiddleware, async (req, res) => {
         // Verificar si el paciente existe.
         const pacienteExistente = await Paciente.findOne({ documento: req.body.documento });
         if (pacienteExistente) {
-            return res.status(400).send({ error: 'Paciente existente' });
+            return res.status(400).send( 'Paciente existente' );
         }
 
         // Crear un nuevo paciente
